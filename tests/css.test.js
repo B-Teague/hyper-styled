@@ -56,8 +56,26 @@ test('css() injects styles into document', t => {
 });
 
 test('css() caches identical template strings and returns the same className', t => {
-  const className1 = css`margin: ${'1rem'};`;
-  const className2 = css`margin: ${'1rem'};`;
+  const className1 = css`margin: '1rem';`;
+  const className2 = css`margin: '1rem';`;
 
   t.is(className1, className2);
+});
+
+test("css supports dynamic values", t => {
+  const className = css`color: ${"blue"}; margin: ${4}px; visible: ${true};`;
+
+  t.truthy(className);
+
+  const styles = extractCss();
+
+  t.regex(styles, /\.hyper-\d+\{.*color:blue;.*margin:4px;.*visible:true;.*\}/);
+});
+
+test("css handles null and undefined values", t => {
+  const class1 = css`color:${null};background:red;`;
+  const class2 = css`margin:${undefined};padding:10px;`;
+
+  t.truthy(class1);
+  t.truthy(class2);
 });
