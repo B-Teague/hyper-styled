@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/B-Teague/hyper-styled"
+    "url": "git+https://github.com/B-Teague/hyper-styled.git"
   },
   "version": "1.0.0",
   "type": "module",
@@ -18,9 +18,9 @@
     "build": "tsup index.js --format cjs,esm"
   },
   "keywords": [
-    "hyperapp", 
-    "css-in-js", 
-    "styled-components", 
+    "hyperapp",
+    "css-in-js",
+    "styled-components",
     "ssr"
   ],
   "dependencies": {
