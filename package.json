@@ -1,12 +1,28 @@
 {
   "name": "hyper-styled",
-  "version": "0.1.0",
+  "author": "Brian Teague <br.teague@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/B-Teague/hyper-styled"
+  },
+  "version": "1.0.0",
   "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "scripts": {
     "test": "ava",
     "coverage": "c8 ava",
-    "build": "tsup"
+    "build": "tsup index.js --format cjs,esm"
   },
+  "keywords": [
+    "hyperapp", 
+    "css-in-js", 
+    "styled-components", 
+    "ssr"
+  ],
   "dependencies": {
     "hyperapp": "^2.0.22",
     "stylis": "^4.3.6"
