@@ -1,15 +1,24 @@
 # hyper-styled
 
+[![npm](https://img.shields.io/npm/v/hyper-styled.svg)](https://www.npmjs.com/package/hyper-styled)
+[![license](https://img.shields.io/npm/l/hyper-styled.svg)](./LICENSE)
+[![build](https://github.com/B-Teague/hyper-styled/actions/workflows/ci.yml/badge.svg)](https://github.com/B-Teague/hyper-styled/actions)
+[![coverage](https://img.shields.io/coveralls/github/B-Teague/hyper-styled/main)](https://coveralls.io/github/B-Teague/hyper-styled)
+
 Minimal CSS-in-JS library for [Hyperapp](https://github.com/jorgebucaran/hyperapp) with zero runtime and full server-side rendering support.
+
+---
 
 ## Features
 
-- ✨ `styled` components using template literals
-- 🧠 Zero runtime dependency
-- 🧪 Compatible with server-side rendering (SSR)
-- 🎯 Extracts CSS via `extractCss()` for injection
-- 🧩 `css`, `globalCss`, and `keyframes` utility functions
-- 💚 Tiny and fast
+- `styled` components using template literals
+- Zero runtime dependencies
+- Server-side rendering (SSR) support via `extractCss()`
+- `css`, `globalCss`, and `keyframes` helpers
+- Only one `<style>` tag per document
+- Tiny footprint and blazing fast
+
+---
 
 ## Installation
 
