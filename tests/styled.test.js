@@ -12,7 +12,7 @@ test('styled.button renders server-side HTML', t => {
   const html = renderToString(vnode);
   const style = extractCss();
 
-  t.is(html, '<button class="hyper-1"></button>');
+  t.is(html, '<button class="hyper-1">Click</button>');
   t.is(style, '.hyper-1{background:blue;}');
 });
 
@@ -25,6 +25,6 @@ test('styled.button merges existing class prop', t => {
   const html = renderToString(vnode);
   const style = extractCss();
 
-  t.is(html, '<button class="hyper-2 external"></button>');
+  t.is(html, '<button class="hyper-2 external">Submit</button>');
   t.true(style.includes('.hyper-2{background:green;}'));
 });

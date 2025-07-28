@@ -31,6 +31,7 @@
     "ava": "^6.4.1",
     "c8": "^10.1.3",
     "hyperapp-render": "^4.0.1",
+    "hyperlit": "^0.3.6",
     "jsdom": "^26.1.0",
     "jsdom-global": "^3.0.2",
     "tsup": "^8.5.0",
