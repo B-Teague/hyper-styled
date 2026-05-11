@@ -3,79 +3,95 @@ import { css, globalCss, keyframes, extractCss } from '../lib/css.js';
 import { JSDOM } from 'jsdom';
 
 test.before(() => {
-  const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
-  global.window = dom.window;
-  global.document = dom.window.document;
+   const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
+   global.window = dom.window;
+   global.document = dom.window.document;
 });
 
-test('css() returns className and injects styles', t => {
-  const className = css`
-    color: red;
-  `;
+test('css() returns className and injects styles', (t) => {
+   const className = css`
+      color: red;
+   `;
 
-  const style = extractCss();
+   const style = extractCss();
 
-  t.is(className, 'hyper-1');
-  t.is(style, ' .hyper-1{color:red;}');
+   t.is(className, 'hyper-1');
+   t.is(style, ' .hyper-1{color:red;}');
 });
 
-test('globalCss() injects global styles', t => {
-  globalCss`
+test('globalCss() injects global styles', (t) => {
+   globalCss`
     body {
       margin: 0;
     }
   `;
 
-  const style = extractCss();
+   const style = extractCss();
 
-  t.is(style, 'body{margin:0;} .hyper-1{color:red;}');
+   t.is(style, 'body{margin:0;} .hyper-1{color:red;}');
 });
 
-test('keyframes() injects animation styles', t => {
-  const anim = keyframes`
+test('keyframes() injects animation styles', (t) => {
+   const anim = keyframes`
     from { opacity: 0; }
     to { opacity: 1; }
   `;
 
-  const style = extractCss();
+   const style = extractCss();
 
-  t.is(anim, 'hyper-3');
-  t.true(style.includes(`@keyframes ${anim}`));
-  t.true(style.includes('from{opacity:0;}to{opacity:1;}'));
+   t.is(anim, 'hyper-3');
+   t.true(style.includes(`@keyframes ${anim}`));
+   t.true(style.includes('from{opacity:0;}to{opacity:1;}'));
 });
 
-test('css() injects styles into document', t => {
+test('css() injects styles into document', (t) => {
+   const style = extractCss();
 
-  const style = extractCss();
+   t.is(
+      style,
+      '@keyframes hyper-3{from{opacity:0;}to{opacity:1;}}body{margin:0;} .hyper-1{color:red;}'
+   );
 
-  t.is(style, '@keyframes hyper-3{from{opacity:0;}to{opacity:1;}}body{margin:0;} .hyper-1{color:red;}');
-
-  const styleTag = document.getElementById('_hyper');
-  t.truthy(styleTag);
-  t.true(styleTag.textContent.includes('color:red'));
+   const styleTag = document.getElementById('_hyper');
+   t.truthy(styleTag);
+   t.true(styleTag.textContent.includes('color:red'));
 });
 
-test('css() caches identical template strings and returns the same className', t => {
-  const className1 = css`margin: '1rem';`;
-  const className2 = css`margin: '1rem';`;
+test('css() caches identical template strings and returns the same className', (t) => {
+   const className1 = css`
+      margin: '1rem';
+   `;
+   const className2 = css`
+      margin: '1rem';
+   `;
 
-  t.is(className1, className2);
+   t.is(className1, className2);
 });
 
-test("css supports dynamic values", t => {
-  const className = css`color: ${"blue"}; margin: ${4}px; visible: ${true};`;
+test('css supports dynamic values', (t) => {
+   const className = css`
+      color: ${'blue'};
+      margin: ${4}px;
+      visible: ${true};
+   `;
 
-  t.truthy(className);
+   t.truthy(className);
 
-  const styles = extractCss();
+   const styles = extractCss();
 
-  t.regex(styles, /\.hyper-\d+\{.*color:blue;.*margin:4px;.*visible:true;.*\}/);
+   t.regex(styles, /\.hyper-\d+\{.*color:blue;.*margin:4px;.*visible:true;.*\}/);
 });
 
-test("css handles null and undefined values", t => {
-  const class1 = css`color:${null};background:red;`;
-  const class2 = css`margin:${undefined};padding:10px;`;
+test('css handles null and undefined values', (t) => {
+   const class1 = css`
+      color: ${null};
+      background: red;
+   `;
+   const class2 = css`
+      margin: ${undefined};
+      padding: 10px;
+   `;
 
-  t.truthy(class1);
-  t.truthy(class2);
+   t.truthy(class1);
+   t.truthy(class2);
 });
